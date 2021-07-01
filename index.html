@@ -1,0 +1,91 @@
+<html>
+
+<head>
+  <title>UVa SDI 2021 Case Study Map</title>
+
+  <!-- Link to JQuery library (used for modal) -->  
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+  <!-- Link to Mapbox GL JS library --> 
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js"></script>
+
+  <!-- Link to Mapbox GL JS css stylesheet -->  
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css" rel="stylesheet">
+
+  <!-- Add Google Fonts support -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+
+  <!-- Add FontAwesome support -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+  <!-- Link to our custom stylesheet -->  
+  <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+  
+  <!-- Map sidebar --> 
+  <div id="sidebar">
+    <div>
+      <h1 class='page-title'>UVa SDI 2021 Case Study Map</h1>
+      <!-- About this map button -->
+      <button id="about" class='button-default'><i class="fas fa-question-circle"></i>&nbsp;About this map</button>
+
+
+      <!-- Reset Map button -->
+<!--
+      <div>
+      <button id="reset" class='button-default'><i class="fas fa-redo"></i>&nbsp;Reset map</button>
+      </div>
+      
+-->
+      <!-- Layers control (populated by javascript code) -->
+      <div id='layers-control'>
+        <h3>Show/Hide Layers:</h3>
+      </div>
+      
+      <!-- Map legend (populated by javascript code) -->
+      <div id='legend'></div>
+      
+
+      
+       
+      <!-- Info window (populated by javascript code from the Mapbox map layers) -->
+      <div id='info-window'>
+        <div>
+          <div id='info-window-body'>
+            <br>
+            <p>Click on a case study location to learn more about it.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <!-- The map will be added to this div by javascript --> 
+  <div id="map-parent">
+    <div id="map"></div>
+
+    <!-- Map overlay sidebar -->
+    <div id='map-sidebar'>
+
+    </div>
+  </div>
+
+  <!-- A modal, hidden by default in our css, which provides info about this project when shown -->
+  <div class='modal'>
+    
+    <h2 class='modal-title'>About this project</h2>
+    
+    <div class='modal-body'><p>This map is created for Summer Design Institute at University of Virginia.</p></div>
+    
+    <button class='close-button'>&times;</button>  <!-- A special "x" character (the multiply sign) used in close buttons -->  
+  </div>
+  <div id="screen"></div> <!-- Black overlay behind the modal -->
+
+</body>
+<!-- Link to our custom javascript, must be placed at the end of the index.html file -->  
+<script src="map.js"></script>
+</html>
