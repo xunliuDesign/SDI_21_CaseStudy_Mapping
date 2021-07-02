@@ -154,14 +154,14 @@ var mapZoom = 1.5;
     var popup = new mapboxgl.Popup({ 
         closeButton: true, // If true, a close button will appear in the top right corner of the popup. Default = true
         closeOnClick: true, // If true, the popup will automatically close if the user clicks anywhere on the map. Default = true
-        anchor: 'bottom', 
-        offset: [0, -15]
+        anchor: 'top', 
+        offset: [0,0]
     });
 
       popup.setLngLat(cases[0].geometry.coordinates);
 
       // Set the contents of the popup window
-      popup.setHTML("<h2>Title: " + cases[0].properties.Project +"</h2>"+"<img src='"+cases[0].properties.url+"width='400' height='300'"+"'>"+"<p>Date: " +cases[0].properties.Date +"<br>Description: "+ cases[0].properties.Description + "</p>");
+      popup.setHTML("<h2>" + cases[0].properties.Project +"</h2>"+"<img src='"+cases[0].properties.url+"' width='400'"+"'>"+"<p>Designer: " +cases[0].properties.Designer + "<br>Date: " + cases[0].properties.Date + "<br>Location: " + cases[0].properties.Location + "<br>Description: "+ cases[0].properties.Description + "<br><a href ='" + cases[0].properties.Source+ "'>Source</a></p>");
         
       popup.addTo(map);
   });
