@@ -1,6 +1,6 @@
 // Global variables
 var mapCenter = [0,30];
-var mapZoom = 2.5;
+var mapZoom = 1.5;
 
 
 // --------------------------------------------------------
@@ -176,7 +176,7 @@ var mapZoom = 2.5;
         // [layerMachineName, layerDisplayName]
         // layerMachineName is the layer name as written in your Mapbox Studio map layers panel
         // layerDisplayName is the way you want the layer's name to appear in the layers control on the website
-        ['Cases', 'Case Study Sites'],                      // layers[0]
+        ['Cases', 'Selected Case Study'],                      // layers[0]
         ['Students', 'Students and Teaching Team'],                              // layers[1][1] = 'Parks'
         ['Terrain', 'Terrain'],     
         ['Contour', 'Contour'],
@@ -191,7 +191,7 @@ var mapZoom = 2.5;
         for (i=0; i<layers.length; i++) {
 
             // add a button for each layer
-            $("#layers-control").append("<a href='#' class='active button-default' id='" + layers[i][0] + "'>" + layers[i][1] + "</a>"); // see http://api.jquery.com/append/
+            $("#layers-control").append("<a href='#' class='active button-default' id='" + layers[i][0] + "'>" + layers[i][1] + "</a><br>"); // see http://api.jquery.com/append/
         }
 
         // show/hide layers when button is clicked

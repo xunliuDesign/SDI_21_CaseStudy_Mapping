@@ -43,9 +43,10 @@ button {
 
 .button-default {
     background-color: lightgrey;
+    margin-bottom: 10px;
     border-radius: 0;
     color: black;
-    padding: 7px 20px;
+    padding: px 20px;
     cursor: pointer;
     border: none;
     font-size: 14px;
@@ -61,7 +62,7 @@ button {
 #sidebar {
     position: fixed;
     left: 0;
-    width: 30%;
+    width: 20%;
     background-color: rgba(211, 211, 211, 0.3);
     z-index: 1;
 }
@@ -91,7 +92,7 @@ button {
 #sidebar>div { padding: 20px; }
 
 .page-title {
-    font-size: 30px;
+    font-size: 20px;
     line-height: 125%;
     border-top: 5px solid black;
 }
@@ -140,6 +141,7 @@ button {
     #layers-control {
         text-align: left;
         z-index: 1;
+        
     }
 
     #layers-control h3 { 
@@ -148,12 +150,12 @@ button {
     }
 
     #layers-control a {
-        font-size: 15px;
+        margin-bottom: 10px;
+        font-size: 12px;
         font-weight: 500;
         color: black;
-        margin: 0 5px 2px 5px;
-        padding: 0;
-        padding: 10px;
+        margin-top:20px;
+        padding: 1px;
         text-decoration: none;
         text-align: left;
         background-color: darkgrey;
