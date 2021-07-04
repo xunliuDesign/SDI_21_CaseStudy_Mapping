@@ -222,7 +222,7 @@ button {
     border: 1px solid white;
     border-radius: 0;
     width: 400px;
-    overflow-y: scroll;
+    overflow: scroll;
 }
 
 .mapboxgl-popup-tip {
