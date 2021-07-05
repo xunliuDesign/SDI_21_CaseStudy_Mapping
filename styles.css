@@ -223,7 +223,7 @@ button {
     border-radius: 0;
     width: 400px;
     height: 400px;
-    overflow: scroll;
+    overflow: auto;
 }
 
 .mapboxgl-popup-tip {
