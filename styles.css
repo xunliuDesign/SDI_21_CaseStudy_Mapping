@@ -222,6 +222,7 @@ button {
     border: 1px solid white;
     border-radius: 0;
     width: 400px;
+    height: 400px;
     overflow: scroll;
 }
 
