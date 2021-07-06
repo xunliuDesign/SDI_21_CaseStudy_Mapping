@@ -161,7 +161,7 @@ $(document).ready(function () {
       // Get Live data
       // Reference: https://github.com/mapbox/real-time-maps#directory-structure
 //     
-        var url = 'https://api.openweathermap.org/data/2.5/weather?q=' + students[0].properties.Location + '&appid=35063a696ba8c55b4558a61011094759&units=imperial';
+        var url = 'https://api.openweathermap.org/data/2.5/weather?lat=' + students[0].properties.Latitude +'&lon='+ students[0].properties.Longitude+ '&appid=35063a696ba8c55b4558a61011094759&units=imperial';
         
 //        var url = 'https://api.openweathermap.org/data/2.5/weather?q=Chicago,US&appid=35063a696ba8c55b4558a61011094759&units=imperial';
         var request = new XMLHttpRequest();
@@ -172,9 +172,15 @@ $(document).ready(function () {
         var text = request.responseText;
         var json = JSON.parse(text);
      
+        var timeDif = students[0].properties.timeDif;
+        
+        var d = new Date();
+        var n = d.getUTCHours();
+        d.setHours( n+timeDif);
+        var localTime = d.toLocaleString();
         
       // Set the contents of the popup window
-      popup.setHTML('<h2>Name: ' + students[0].properties.Name + '</h2><p>Location: ' + students[0].properties.Location + '<br>Current Weather: '+ json.weather[0].main+ '<br>Current Temperature: '+ json.main.temp +'F'+'<br>Current Humidity: '+ json.main.humidity+'<br>Current Time Zone: '+ json.timezone+'</p>');
+      popup.setHTML('<h2>Name: ' + students[0].properties.Name + '</h2><p>Location: ' + students[0].properties.Location + '<br>Current Weather: '+ json.weather[0].main+ '<br>Current Temperature: '+ json.main.temp +'F'+'<br>Current Humidity: '+ json.main.humidity+'<br>Current Time: '+ localTime +'</p>');
 
         
 
