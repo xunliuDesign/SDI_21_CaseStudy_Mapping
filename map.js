@@ -124,7 +124,45 @@ var mapZoom = 1.5;
         $(".modal").fadeToggle();
     });
 
+// -------------------------------------------------------- 
+// Popups
+// See tutorial at https://docs.mapbox.com/help/tutorials/add-points-pt-3/
+// See example of popups on click at https://docs.mapbox.com/mapbox-gl-js/example/popup-on-click/ 
+// See example of popups on hover at https://docs.mapbox.com/mapbox-gl-js/example/popup-on-hover/
 
+    // Create a popup on click 
+    map.on('click', function(e) {   // Event listener to do some code when user clicks on the map
+
+
+        var cases = map.queryRenderedFeatures(e.point, {  // Query the map at the clicked point. See https://www.mapbox.com/mapbox-gl-js/example/queryrenderedfeatures/ for an example on how queryRenderedFeatures works and https://www.mapbox.com/mapbox-gl-js/api/#map#queryrenderedfeatures for documentation
+        layers: ['Cases']    // replace this with the name of the layer from the Mapbox Studio layers panel
+    });
+
+      // if the layer is empty, this if statement will exit the function (no popups created) -- this is a failsafe to avoid non-functioning popups
+      if (cases.length == 0) {
+        return;
+    }
+
+    // Initiate the popup
+    var popup = new mapboxgl.Popup({ 
+        closeButton: true, // If true, a close button will appear in the top right corner of the popup. Default = true
+        closeOnClick: true, // If true, the popup will automatically close if the user clicks anywhere on the map. Default = true
+        anchor: 'bottom', // The popup's location relative to the feature. Options are 'top', 'bottom', 'left', 'right', 'top-left', 'top-right', 'bottom-left' and 'bottom-right'. If not set, the popup's location will be set dynamically to make sure it is always visible in the map container.
+        offset: [0, -15] // A pixel offset from the centerpoint of the feature. Can be a single number, an [x,y] coordinate, or an object of [x,y] coordinates specifying an offset for each of the different anchor options (e.g. 'top' and 'bottom'). Negative numbers indicate left and up.
+    });
+
+      // Set the popup location based on each feature
+      popup.setLngLat(cases[0].geometry.coordinates);
+
+      // Set the contents of the popup window
+     popup.setHTML("<h2>" + cases[0].properties.Project +"</h2>"+"<img src='"+cases[0].properties.url+"' width='380'"+"'>"+"<p>Designer: " +cases[0].properties.Designer + "<br>Date: " + cases[0].properties.Date + "<br>Location: " + cases[0].properties.Location + "<br>Description: "+ cases[0].properties.Description + "<br><br><a href ='" + cases[0].properties.Source+ "'>Source</a></p>");
+
+        
+
+      // Add the popup to the map 
+      popup.addTo(map);  // replace "map" with the name of the variable in line 4, if different
+        
+  });
 // -------------------------------------------------------- 
 // Popups
 // See tutorial at https://docs.mapbox.com/help/tutorials/add-points-pt-3/
