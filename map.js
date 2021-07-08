@@ -7,16 +7,16 @@ var mapZoom = 1.5;
 //Live Data link to google sheet Part A
 
 
-var transformRequest = (url, resourceType) => {
-  var isMapboxRequest =
-    url.slice(8, 22) === "api.mapbox.com" ||
-    url.slice(10, 26) === "tiles.mapbox.com";
-  return {
-    url: isMapboxRequest
-      ? url.replace("?", "?pluginName=sheetMapper&")
-      : url
-  };
-};
+//var transformRequest = (url, resourceType) => {
+//  var isMapboxRequest =
+//    url.slice(8, 22) === "api.mapbox.com" ||
+//    url.slice(10, 26) === "tiles.mapbox.com";
+//  return {
+//    url: isMapboxRequest
+//      ? url.replace("?", "?pluginName=sheetMapper&")
+//      : url
+//  };
+//};
 
 
 // --------------------------------------------------------
@@ -29,84 +29,83 @@ var transformRequest = (url, resourceType) => {
         center: mapCenter, // set the centerpoint of the map programatically. Note that this is [longitude, latitude]!
         zoom: mapZoom, // set the default zoom programatically
     	style: 'mapbox://styles/xunliu/ckqhk5f702reb17p7iakske5x',// replace this value with the style URL from Mapbox Studio
-        transformRequest: transformRequest
+        //transformRequest: transformRequest
     });
 
 //-----------------------------------------------------------
 //Live Data link to google sheet Part B
-$(document).ready(function () {
-      $.ajax({
-        type: "GET",
-        //YOUR TURN: Replace with csv export link
-        url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRSyFzraNTlQbU2TNkrIp6Jc15SgeQKJZigPCA8fVglyhCi3AFhAsGhkaj6c6L6h-gsood5Kbw4NhZb/pub?gid=0&single=true&output=csv',
-        dataType: "text",
-        success: function (csvData) { makeGeoJSON(csvData); }
-      });
-    
+//$(document).ready(function () {
+//      $.ajax({
+//        type: "GET",
+//        //YOUR TURN: Replace with csv export link
+//        url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRSyFzraNTlQbU2TNkrIp6Jc15SgeQKJZigPCA8fVglyhCi3AFhAsGhkaj6c6L6h-gsood5Kbw4NhZb/pub?gid=0&single=true&output=csv',
+//        dataType: "text",
+//        success: function (csvData) { makeGeoJSON(csvData); }
+//      });
+//    
+//
+//      function makeGeoJSON(csvData) {
+//        csv2geojson.csv2geojson(csvData, {
+//          latfield: 'Latitude',
+//          lonfield: 'Longitude',
+//          delimiter: ','
+//        }, function (err, data) {
+//          map.on('load', function () {
+//
+//            //Add the the layer to the map
+//            map.addLayer({
+//              'id': 'casesLive',
+//              'type': 'symbol',
+//              'source': {
+//                'type': 'geojson',
+//                'data': data
+//              },
+//              'layout': {
+//                'icon-image': 'hospital-15',
+//              }
+//            });
+//
+//
+//        // Create a popup on click 
+//            map.on('click', function(e) {   // Event listener to do some code when user clicks on the map
+//
+//                // Change the cursor to a pointer when the mouse is over the places layer.
+//                map.on('mouseenter',  function () {
+//                map.getCanvas().style.cursor = 'pointer';
+//                });
+//
+//                // Change it back to a pointer when it leaves.
+//                map.on('mouseleave',  function () {
+//                map.getCanvas().style.cursor = '';
+//                });
+//                var cases = map.queryRenderedFeatures(e.point, { 
+//                layers: ['Cases']    // replace this with the name of the layer from the Mapbox Studio layers panel
+//            });
+//
+//              if (cases.length == 0) {
+//                return;
+//            }
+//
+//            var popup = new mapboxgl.Popup({ 
+//                closeButton: true, // If true, a close button will appear in the top right corner of the popup. Default = true
+//                closeOnClick: true, // If true, the popup will automatically close if the user clicks anywhere on the map. Default = true
+//                anchor: 'bottom', 
+//                offset: [0,0]
+//            });
+//
+//              popup.setLngLat(cases[0].geometry.coordinates);
+//
+//              // Set the contents of the popup window
+//              popup.setHTML("<h2>" + cases[0].properties.Project +"</h2>"+"<img src='"+cases[0].properties.url+"' width='380'"+"'>"+"<p>Designer: " +cases[0].properties.Designer + "<br>Date: " + cases[0].properties.Date + "<br>Location: " + cases[0].properties.Location + "<br>Description: "+ cases[0].properties.Description + "<br><br><a href ='" + cases[0].properties.Source+ "'>Source</a></p>");
+//
+//              popup.addTo(map);
+//          });  
 
-      function makeGeoJSON(csvData) {
-        csv2geojson.csv2geojson(csvData, {
-          latfield: 'Latitude',
-          lonfield: 'Longitude',
-          delimiter: ','
-        }, function (err, data) {
-          map.on('load', function () {
-
-            //Add the the layer to the map
-            map.addLayer({
-              'id': 'casesLive',
-              'type': 'symbol',
-              'source': {
-                'type': 'geojson',
-                'data': data
-              },
-              'layout': {
-                'icon-image': 'hospital-15',
-              }
-            });
-
-
-        // Create a popup on click 
-            map.on('click', function(e) {   // Event listener to do some code when user clicks on the map
-
-                // Change the cursor to a pointer when the mouse is over the places layer.
-                map.on('mouseenter',  function () {
-                map.getCanvas().style.cursor = 'pointer';
-                });
-
-                // Change it back to a pointer when it leaves.
-                map.on('mouseleave',  function () {
-                map.getCanvas().style.cursor = '';
-                });
-                var cases = map.queryRenderedFeatures(e.point, { 
-                layers: ['casesLive']    // replace this with the name of the layer from the Mapbox Studio layers panel
-            });
-
-              if (cases.length == 0) {
-                return;
-            }
-
-            var popup = new mapboxgl.Popup({ 
-                closeButton: true, // If true, a close button will appear in the top right corner of the popup. Default = true
-                closeOnClick: true, // If true, the popup will automatically close if the user clicks anywhere on the map. Default = true
-                anchor: 'bottom', 
-                offset: [0,0]
-            });
-
-              popup.setLngLat(cases[0].geometry.coordinates);
-
-              // Set the contents of the popup window
-              popup.setHTML("<h2>" + cases[0].properties.Project +"</h2>"+"<img src='"+cases[0].properties.url+"' width='380'"+"'>"+"<p>Designer: " +cases[0].properties.Designer + "<br>Date: " + cases[0].properties.Date + "<br>Location: " + cases[0].properties.Location + "<br>Description: "+ cases[0].properties.Description + "<br><br><a href ='" + cases[0].properties.Source+ "'>Source</a></p>");
-
-              popup.addTo(map);
-          });  
-
-
-          });
-
-        });
-      };
-    });
+//          });
+//
+//        });
+//      };
+//    });
 
 
 
@@ -200,7 +199,8 @@ $(document).ready(function () {
         // [layerMachineName, layerDisplayName]
         // layerMachineName is the layer name as written in your Mapbox Studio map layers panel
         // layerDisplayName is the way you want the layer's name to appear in the layers control on the website
-        ['casesLive', 'Selected Case Study'],                      // layers[0]
+        //['casesLive', 'Selected Case Study'],                      // layers[0]
+        ['Cases', 'Selected Case Study'],                      // layers[0]
         ['Students', 'Students and Teaching Team'],                              // layers[1][1] = 'Parks'
         ['Terrain', 'Terrain'],     
         ['Contour', 'Contour'],
@@ -243,21 +243,21 @@ $(document).ready(function () {
 
 // -------------------------------------------------------- 
 // 9. Reset map button
-    
-    $("#reset").click(function() {
-        map.setCenter(mapCenter);
-        map.setZoom(mapZoom);
-        map.setPitch(0);
-        map.setBearing(0);
-        map.setFilter("cville-building-permits", null); // reset building permits filters
-        
-        // Reset all layers to visible
-        for (i=0; i<layers.length; i++) {
-            map.setLayoutProperty(layers[i][0], 'visibility', 'visible'); 
-            $("#" + layers[i][0]).addClass('active');
-        }                   
-
-    });
+//    
+//    $("#reset").click(function() {
+//        map.setCenter(mapCenter);
+//        map.setZoom(mapZoom);
+//        map.setPitch(0);
+//        map.setBearing(0);
+//        map.setFilter("cville-building-permits", null); // reset building permits filters
+//        
+//        // Reset all layers to visible
+//        for (i=0; i<layers.length; i++) {
+//            map.setLayoutProperty(layers[i][0], 'visibility', 'visible'); 
+//            $("#" + layers[i][0]).addClass('active');
+//        }                   
+//
+//    });
 
 
 
